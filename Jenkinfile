@@ -1,20 +1,19 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                git credentialsId: 'github-cred' url: 'https://github.com/107Shubhangi/login_page.git', branch: 'main'
+                git 'https://github.com/107Shubhangi/login_page.git'
             }
         }
-        
-        stage('Deploy to Local Server') {
+        stage('Build') {
             steps {
-                script {
-                    def webRoot = '/var/www/html/'  // Change this path for your server
-                    sh "rm -rf ${webRoot}*"
-                    sh "cp -r * ${webRoot}"
-                }
+                echo 'Building the project...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the project...'
             }
         }
     }
